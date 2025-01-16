@@ -27,8 +27,35 @@ class ScoreCalculator():
                 frameRolls.append(roll)
 
         framedAnnotation.append(frameRolls)
-        print (framedAnnotation)
+        #print (framedAnnotation)
         return framedAnnotation
+    
+    def __framedValues(self):
+        framedValues = []
+
+        frames = self.__frameAnnotation()
+        for frameIndex in range(len(frames)-1):
+            frameValue = []
+
+            if '/' in frames[frameIndex]:
+                frameValue = frames[frameIndex] + list(frames[frameIndex+1][0])
+                framedValues.append(frameValue)
+                frameValue = []
+            elif 'X' in frames[frameIndex]:
+                try:
+                    frameValue = frames[frameIndex] + list(frames[frameIndex+1][0]) + list(frames[frameIndex+1][1])
+                except IndexError:
+                    frameValue = frames[frameIndex] + list(frames[frameIndex+1][0]) + list(frames[frameIndex+2][0])
+                finally:
+                    framedValues.append(frameValue)
+                    frameValue = []
+            else:
+                framedValues.append(frames[frameIndex])
+        
+        framedValues.append(frames[-1])
+        #print(framedValues)
+        return framedValues
+
 
 
         
