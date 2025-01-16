@@ -3,7 +3,7 @@ class ScoreCalculator():
         self.annotation = annotation
 
     def calculateScore(self):
-        pass
+        return sum(self.__translateToInt())
 
     def __frameAnnotation(self):
         MAXFRAMEINDEX = 9
@@ -64,10 +64,11 @@ class ScoreCalculator():
             for roll in frame:
                 if roll == 'X':
                     frametotal += 10
+                elif roll == '-':
+                    frame[frame.index(roll)] = 0
+                    continue
                 elif roll == '/':
                     frametotal += 10 - int(frame[frame.index('/')-1])
-                elif roll == '-':
-                    continue
                 else:
                     frametotal += int(roll)
             finalvalues.append(frametotal)
