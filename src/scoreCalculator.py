@@ -55,6 +55,27 @@ class ScoreCalculator():
         framedValues.append(frames[-1])
         #print(framedValues)
         return framedValues
+    
+    def __translateToInt(self):
+        values = self.__framedValues()
+        finalvalues = []
+        for frame in values:
+            frametotal = 0
+            for roll in frame:
+                if roll == 'X':
+                    frametotal += 10
+                elif roll == '/':
+                    frametotal += 10 - int(frame[frame.index('/')-1])
+                elif roll == '-':
+                    continue
+                else:
+                    frametotal += int(roll)
+            finalvalues.append(frametotal)
+        
+        print (finalvalues)
+        return finalvalues
+
+
 
 
 
