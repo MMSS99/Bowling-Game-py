@@ -1,5 +1,6 @@
 import pytest
 
+# cada 2 es un turno
 
 @pytest.mark.state_n
 def test_hitting_pins_regular():
