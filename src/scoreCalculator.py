@@ -27,7 +27,6 @@ class ScoreCalculator():
                 frameRolls.append(roll)
 
         framedAnnotation.append(frameRolls)
-        #print (framedAnnotation)
         return framedAnnotation
     
     def __framedValues(self):
@@ -53,7 +52,6 @@ class ScoreCalculator():
                 framedValues.append(frames[frameIndex])
         
         framedValues.append(frames[-1])
-        #print(framedValues)
         return framedValues
     
     def __translateToInt(self):
@@ -66,7 +64,6 @@ class ScoreCalculator():
                     frametotal += 10
                 elif roll == '-':
                     frame[frame.index(roll)] = 0
-                    continue
                 elif roll == '/':
                     frametotal += 10 - int(frame[frame.index('/')-1])
                 else:
