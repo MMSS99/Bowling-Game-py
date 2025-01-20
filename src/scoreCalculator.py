@@ -7,6 +7,7 @@ class ScoreCalculator():
 
     def __frameAnnotation(self):
         MAXFRAMEINDEX = 9
+        MAXFRAMELENGTH = 2
         framedAnnotation = []
 
         frameRolls = []
@@ -19,7 +20,7 @@ class ScoreCalculator():
                     framedAnnotation.append(frameRolls)
                     frameRolls = []
 
-                if len(frameRolls) == 2:
+                if len(frameRolls) == MAXFRAMELENGTH:
                     framedAnnotation.append(frameRolls)
                     frameRolls = []
 
@@ -55,17 +56,19 @@ class ScoreCalculator():
         return framedValues
     
     def __translateToInt(self):
+        MAXROLL = 10
+        MISS = 0
         values = self.__framedValues()
         finalvalues = []
         for frame in values:
             frametotal = 0
             for roll in frame:
                 if roll == 'X':
-                    frametotal += 10
+                    frametotal += MAXROLL
                 elif roll == '-':
-                    frame[frame.index(roll)] = 0
+                    frame[frame.index(roll)] = MISS
                 elif roll == '/':
-                    frametotal += 10 - int(frame[frame.index('/')-1])
+                    frametotal += MAXROLL - int(frame[frame.index('/')-1])
                 else:
                     frametotal += int(roll)
             finalvalues.append(frametotal)
