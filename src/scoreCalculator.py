@@ -32,10 +32,14 @@ class ScoreCalculator():
         return framedAnnotation
     
     def __framedValues(self):
+        MAXFRAMEINDEX = 9
+
         framedValues = []
 
         frames = self.__frameAnnotation()
-        for frameIndex in range(len(frames)-1):
+        frameIndex = 0
+        #for frameIndex in range(len(frames)-1):
+        while frameIndex < MAXFRAMEINDEX:
             frameValue = []
 
             if '/' in frames[frameIndex]:
@@ -52,31 +56,32 @@ class ScoreCalculator():
                     frameValue = []
             else:
                 framedValues.append(frames[frameIndex])
+
+            frameIndex += 1
         
         framedValues.append(frames[-1])
         return framedValues
     
     def __translateToInt(self):
-        MAXROLL = 10
+        MAXROLLSCORE = 10
         MISS = 0
 
         values = self.__framedValues()
-        
+
         finalvalues = []
         for frame in values:
             frametotal = 0
             for roll in frame:
                 if roll == 'X':
-                    frametotal += MAXROLL
+                    frametotal += MAXROLLSCORE
                 elif roll == '-':
                     frame[frame.index(roll)] = MISS
                 elif roll == '/':
-                    frametotal += MAXROLL - int(frame[frame.index('/')-1])
+                    frametotal += MAXROLLSCORE - int(frame[frame.index('/')-1])
                 else:
                     frametotal += int(roll)
             finalvalues.append(frametotal)
         
-        print (finalvalues)
         return finalvalues
 
 
